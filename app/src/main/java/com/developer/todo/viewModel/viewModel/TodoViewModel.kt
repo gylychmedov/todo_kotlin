@@ -18,4 +18,16 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     fun getTodo() {
         TodoRepo.getTodoList()
     }
+
+    fun addTodo(todo: Todo) {
+        TodoRepo.addTodo(todo)
+    }
+
+    fun updateTodo(todo: Todo) {
+        TodoRepo.updateTodo(todo)
+    }
+
+    fun deleteTodo(todo: Todo) {
+        TodoRepo.deleteTodo(todo)
+    }
 }

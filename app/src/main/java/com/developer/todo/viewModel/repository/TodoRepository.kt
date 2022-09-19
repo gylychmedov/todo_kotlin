@@ -26,4 +26,25 @@ class TodoRepository(val application: Application) {
             todoList.value = db.getAllTodo()
         }
     }
+
+    fun addTodo(todo: Todo){
+        val job: Job = CoroutineScope(Dispatchers.Main).launch {
+            db.addTodo(todo)
+            getTodoList()
+        }
+    }
+
+    fun updateTodo(todo: Todo) {
+        val job: Job = CoroutineScope(Dispatchers.Main).launch {
+            db.updateTodo(todo)
+            getTodoList()
+        }
+    }
+
+    fun deleteTodo(todo: Todo) {
+        val job: Job = CoroutineScope(Dispatchers.Main).launch {
+            db.deleteTodo(todo)
+            getTodoList()
+        }
+    }
 }
