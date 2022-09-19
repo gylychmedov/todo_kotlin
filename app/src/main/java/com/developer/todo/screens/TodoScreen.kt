@@ -1,6 +1,7 @@
 package com.developer.todo.screens
 
 import android.app.Application
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -44,8 +45,12 @@ fun TodoScreen() {
                     modifier = Modifier.fillMaxWidth()
                 )
                 OutlinedButton(onClick = {
-                    todoViewModel.addTodo(Todo(0, text.value, false))
-                    text.value = ""
+                    if(text.value.length == 0) {
+                        Toast.makeText(context, "Enter todo", Toast.LENGTH_SHORT).show()
+                    } else {
+                        todoViewModel.addTodo(Todo(0, text.value, false))
+                        text.value = ""
+                    }
                 }) {
                     Text(text = "Add")
                 }
@@ -53,7 +58,7 @@ fun TodoScreen() {
 
             if (todoList.value.isNotEmpty()) {
                 LazyColumn() {
-                    items(todoList.value) {
+                    items(todoList.value.reversed()) {
                         TodoItem(todo = it, todoViewModel)
                     }
                 }
